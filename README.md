@@ -39,4 +39,8 @@ You can customize your validation by giving StewardStar a context, or you can si
 
 
 
+## How to run the solution
+
+In your terminal, run `streamlit run .\home_page.py` to launch StewardStar. Make sure to modify the .env file with the corresponding Azure OpenAI API configuration before running the code.
+
 
