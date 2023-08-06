@@ -1,0 +1,4 @@
+CREATE TABLE [Regions]( 
+   [RegionID]INTEGER NOT NULL PRIMARY KEY, 
+   [RegionDescription]TEXT NOT NULL
+); 

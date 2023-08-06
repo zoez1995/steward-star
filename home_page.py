@@ -2,6 +2,8 @@
 from config import *
 from components import *
 from page_placeholder import *
+from viz_page import *
+from comm_page import *
 
 setup_page()
 def dq_page():
@@ -10,14 +12,18 @@ def dq_page():
     welcome_message()
     site_description()
     # param set up
-
+    st.subheader("📋 Generate Data Quality Report")
     context = context_file()
+    st.write("Context Preview:")
+    st.write(context)
     data = file_container()
+    st.write("Data Preview:")
+    data_preview(data)
     query = st.text_input("What's your question about the data you uploaded?")
 
 
 
-    ## SYSTEM PROMPT 
+    ## PROMPT 
     system_prompt = "Assistant is a highly skilled Data Quality Analyst. He can answer any question you have about your data."
     instruction = """I want you to act as a Data Steward in charge of monitoring and improving the data quality at your company. 
     You will have access to several data tables at the company along with table schemas. 
@@ -30,7 +36,8 @@ def dq_page():
         2. Create a detailed DQ Report addressing these DQ dimensions with appropriate DQ metrics. Examples could be - percentage of null records etc. DQ report should be in a document format with clear section headers.
         3. Flag anomalous records. In the DQ report, create a section for anomalous records. Anomalies could be data that doesn't fit real-world expectations, such as longitude values that are negative.
         4. Suggest ways that to replace anomalous data with reasonable approximations - you could look at techniques such as interpolation
-    Below is the information about the data tables I may want to ask you questions about:"""
+    If I provide any context about the data to you, you must ensure the data complies with the context. For example, if I give you a table DDL as the context, you must check if the columns in the data matches the table DDL. 
+    Below is the context about the data I may want to ask you questions about:"""
 
 
     ## HANDLE USER INPUT
@@ -47,8 +54,6 @@ def dq_page():
 
     ## DISPLAY RESPONSE 
     if st.button("Generate Report", type="primary"):
-        st.write("Data Preview:")
-        data_preview(data)
         response = llm([
             SystemMessage(content=system_prompt),
             HumanMessage(content=instruction + context + "Here's my data: " + data_prompt + "Read the data above and answer my question: " + query)
@@ -56,14 +61,17 @@ def dq_page():
         # llm = openai.ChatCompletion.create(**parameters)
         # llm_dict = dict(llm)
         # content = llm_dict['choices'][0]['message']['content']
+        st.divider()
+        st.subheader("Data Quality Report")
         st.markdown(response)
+        st.session_state.generated_text = response
 
 
 # Create a dictionary of pages
 pages = {
     "Diagnose Data": dq_page,
-    "Visualize Data": viz_page,
-    "Generate Communication": comm_page,
+    "Visualize Data": viz,
+    "Generate Communication": comm,
 }
 
 # Create a sidebar for navigation

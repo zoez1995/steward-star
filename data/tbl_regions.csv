@@ -1,5 +1,6 @@
-RegionID,RegionDescription
-1,Eastern                                           
-2,Westerns                                           
-3,Northern                                          
-4,Southern                                          
+RegionID,RegionDescription,RegionCountry
+1,Eastern                                           ,USA
+2,Westerns                                           ,US
+3,Northern                                          ,USA
+4,Southern                                          ,USA
+5,,USA

@@ -5,7 +5,7 @@ import pandas as pd
 ## PAGE HEADER
 def setup_page():
     st.set_page_config(
-        page_title = "StewardStar - The AI Data Quality Commandar",
+        page_title = "StewardStar - The AI Data Quality Controller",
         layout = "wide",
         page_icon = "💫",
         initial_sidebar_state="expanded",
@@ -13,11 +13,11 @@ def setup_page():
 
 ## HEADER IMAGE
 def display_logo():
-    st.image("data/header_image.png", width = 1060)
+    st.image("data/header_image.png", width = 800)
 
 # WELCOME MESSAGE
 def welcome_message():
-    st.header("💫 Welcome to StewardStar - The AI Data Quality Commandar 🧙")
+    st.header("💫 Welcome to StewardStar - The Data Quality Controller Powered by GenAI 🧙")
 
 # SITE DESCRIPTION
 def site_description():
@@ -25,7 +25,7 @@ def site_description():
 
 # UPLOAD CONTEXT FILE
 def context_file():
-    uploaded_file = st.file_uploader("Upload your context file below. The context file can be a data schema file of your database or a data template you want StewardStar to refer to. You can skip this step if you don't wamt to use a context file.", type=["csv", "txt"])
+    uploaded_file = st.file_uploader("Upload your context file below. The context file can be a data schema file of your database or a data template you want StewardStar to refer to. You can skip this step if you don't want to use a context file.", type=["csv", "txt"])
     df_string = ""
     if uploaded_file is not None:
         if uploaded_file.type == "text/plain": 
@@ -53,9 +53,10 @@ def file_container():
             if uploaded_file.type == "text/plain": 
                 df = pd.read_csv(uploaded_file, sep="\t")
             elif uploaded_file.type ==  "text/csv":
-                df = pd.read_csv(uploaded_file, encoding='ISO-8859-1')
+                df = pd.read_csv(uploaded_file)
             else:
                 df = pd.read_excel(uploaded_file, index_col=None, engine="openpyxl")
+            # st.session_state[uploaded_file.name] = df
             result.append(df)
     return result
 
