@@ -19,7 +19,8 @@ def viz():
     the priority of the data issues, and can provide data quality improvement guidance to data owners."""
     instruction = """I will provide you with some data along with some null value summary statistics. 
     I want you to give me a high level interpretation of the data quality of the data I provided, and point out what should be the prority of the data issues
-    Some fields in the data sets are critical and can't be Null, for example, in customer's data, CustomerID, CompanyName, ContactName can't be left blank, while fields like Address or Fax can be left blank.
+    Some fields in the data sets are critical and can't be Null, for example, in the data, primary keys can't be left blank, while fields that are not primary keys can be left blank.
+    Focus on the Null value issue first, then look at other data quality issue such as format of the data.
     Please bucket the action recommendations into "High", "Medium", and "Low" priority."""
     
     data = file_container()

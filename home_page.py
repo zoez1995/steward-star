@@ -14,17 +14,13 @@ def dq_page():
     # param set up
     st.subheader("📋 Generate Data Quality Report")
     context = context_file()
-    st.write("Context Preview:")
     st.write(context)
     data = file_container()
-    st.write("Data Preview:")
     data_preview(data)
     query = st.text_input("What's your question about the data you uploaded?")
 
-
-
     ## PROMPT 
-    system_prompt = "Assistant is a highly skilled Data Quality Analyst. He can answer any question you have about your data."
+    system_prompt = "Assistant is a highly skilled Data Quality Analyst. He can answer any question you have about your data. He's very detail oriented and always provide the accurate analysis."
     instruction = """I want you to act as a Data Steward in charge of monitoring and improving the data quality at your company. 
     You will have access to several data tables at the company along with table schemas. 
     These data tables can have text or numeric data. 
@@ -36,7 +32,7 @@ def dq_page():
         2. Create a detailed DQ Report addressing these DQ dimensions with appropriate DQ metrics. Examples could be - percentage of null records etc. DQ report should be in a document format with clear section headers.
         3. Flag anomalous records. In the DQ report, create a section for anomalous records. Anomalies could be data that doesn't fit real-world expectations, such as longitude values that are negative.
         4. Suggest ways that to replace anomalous data with reasonable approximations - you could look at techniques such as interpolation
-    If I provide any context about the data to you, you must ensure the data complies with the context. For example, if I give you a table DDL as the context, you must check if the columns in the data matches the table DDL. 
+    If I provide any context about the data to you, you must ensure the data complies with the context. For example, if I give you a table schema as the context, you must check if the columns, especially primary keys, are in the data, and matches the table schema. 
     Below is the context about the data I may want to ask you questions about:"""
 
 

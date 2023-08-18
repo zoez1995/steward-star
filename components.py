@@ -13,7 +13,7 @@ def setup_page():
 
 ## HEADER IMAGE
 def display_logo():
-    st.image("data/header_image.png", width = 800)
+    st.image("data/header_image.png", width = 1400)
 
 # WELCOME MESSAGE
 def welcome_message():
@@ -31,9 +31,10 @@ def context_file():
         if uploaded_file.type == "text/plain": 
             df = pd.read_csv(uploaded_file, sep="\t")
         elif uploaded_file.type ==  "text/csv":
-            df = pd.read_csv(uploaded_file, encoding='ISO-8859-1')
+            df = pd.read_csv(uploaded_file)
         df_string = df.to_string()
         df_string.replace(" ","")
+        st.write("Context Preview:")
     return df_string
 
 
@@ -62,5 +63,7 @@ def file_container():
 
 # GENERATE DATA PREVIEW
 def data_preview(data_list):
+    st.write("Data Preview:")
     for df in data_list:
         st.dataframe(df.head(20))
+        

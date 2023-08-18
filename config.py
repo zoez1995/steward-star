@@ -36,7 +36,7 @@ OPENAI_MODEL_NAME = env("OPENAI_MODEL_NAME")
 
 
 # model configuration
-temp = 0
+temp = 0.1
 llm = AzureChatOpenAI(
     openai_api_key = AZURE_API_KEY,
     openai_api_base = OPENAI_DEPLOYMENT_ENDPOINT,
